@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login Successful</title>
+  <style>
+    :root{
+      --bg:#f3f4f6;
+      --card:#ffffff;
+      --accent:#2563eb; /* classic blue */
+      --muted:#6b7280;
+      --shadow: 0 8px 24px rgba(16,24,40,0.08);
+      --radius:12px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #e0e7ff 0%, var(--bg) 100%);
+      display:grid;
+      place-items:center;
+      color:#0f172a;
+      padding:2rem;
+    }
+
+    .card{
+      width:100%;
+      max-width:520px;
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:2.25rem 2rem;
+      text-align:center;
+      animation:fadeIn .5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(10px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    .icon-wrap{
+      width:96px;height:96px;margin:0 auto 1rem;
+      display:grid;place-items:center;border-radius:50%;background:linear-gradient(180deg, rgba(37,99,235,0.12), rgba(37,99,235,0.06));
+      border:1px solid rgba(37,99,235,0.08);
+    }
+
+    .title{font-size:1.4rem;font-weight:700;margin:0.25rem 0 0.35rem;}
+    .subtitle{color:var(--muted);margin:0.5rem 0 1.25rem;font-size:1rem;}
+
+    .details{
+      background:#f8faff;border-radius:10px;padding:0.9rem 1rem;margin:1.1rem 0;border:1px solid rgba(15,23,42,0.03);
+      font-size:0.95rem;color:var(--muted);
+    }
+
+    .continue-btn{
+      display:inline-flex;align-items:center;gap:0.6rem;padding:0.75rem 1.15rem;border-radius:10px;border:none;cursor:pointer;
+      background:var(--accent);color:white;font-weight:600;font-size:1rem;box-shadow:0 6px 18px rgba(37,99,235,0.18);
+      transition:transform .12s ease;
+      text-decoration:none;
+    }
+    .continue-btn:hover{transform:translateY(-3px);}
+    .continue-btn:active{transform:translateY(-1px);}
+
+    .classic-note{font-size:0.82rem;color:var(--muted);margin-top:0.6rem}
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="success-title">
+    <div class="icon-wrap" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="12" fill="white" fill-opacity="0.02"/>
+        <path d="M20 6L9 17L4 12" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 id="success-title" class="title">Congratulations!</h1>
+    <p class="subtitle">You have successfully logged in to our program.</p>
+
+    <div class="details" role="status" aria-live="polite">
+      <strong>Status:</strong> Login Verified<br>
+      <span style="color:var(--muted);">You're all set — you can now continue forward.</span>
+    </div>
+
+    <a href="/" class="continue-btn">
+      Continue
+    </a>
+
+    <p class="classic-note">Classic login success screen · Secure · Verified</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login - Classic Blue Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .input-with-icon .toggle-password {
+            left: auto;
+            right: 15px;
+            cursor: pointer;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .form-control.error {
+            border-color: #e74c3c;
+        }
+        
+        .form-control.success {
+            border-color: #2ecc71;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-password {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .divider:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #eee;
+        }
+        
+        .divider span {
+            background-color: white;
+            padding: 0 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .signup-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background-color: #f9f9f9;
+            padding: 15px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        @media (max-width: 500px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .forgot-password {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome Back</h1>
+            <p>Login to your account</p>
+        </div>
+        
+        <div class="form-container">
+            <!-- IMPORTANT: action="/login" and method="post" so server receives the data -->
+            <form id="loginForm" method="post" action="/login" novalidate>
+                <div class="form-group">
+                    <label for="identifier">Username or Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <!-- server expects form field name "identifier" -->
+                        <input type="text" id="identifier" name="identifier" class="form-control" placeholder="Enter username or email" required autocomplete="username">
+                    </div>
+                    <div class="error-message" id="identifier-error">Please enter a valid username or email address</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                        <i class="fas fa-eye toggle-password" id="togglePassword" title="Toggle password visibility" style="right:15px;position:absolute;top:50%;transform:translateY(-50%);cursor:pointer"></i>
+                    </div>
+                    <div class="error-message" id="password-error">Password must be at least 6 characters long</div>
+                </div>
+                
+                <div class="options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                   
+                </div>
+                
+                <!-- Proper submit button (server will validate credentials) -->
+                <button type="submit" class="btn" id="submitBtn">Log In</button>
+                
+                <div class="divider">
+                    <span>Don't have an account?</span>
+                </div>
+                
+                <div class="signup-link">
+                    <p><a href="/">Create a new account</a></p>
+                </div>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2023 Classic Forms. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Elements
+        const form = document.getElementById('loginForm');
+        const identifier = document.getElementById('identifier');
+        const password = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const identifierError = document.getElementById('identifier-error');
+        const passwordError = document.getElementById('password-error');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Validation flags
+        let okId = false;
+        let okPw = false;
+        
+        function validateIdentifier() {
+            const v = identifier.value.trim();
+            if (v.length === 0) {
+                showIdentifierError("Username or email is required");
+                okId = false;
+                updateSubmitState();
+                return;
+            }
+            if (v.includes('@')) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!re.test(v)) {
+                    showIdentifierError("Please enter a valid email address");
+                    okId = false;
+                    updateSubmitState();
+                    return;
+                }
+            } else {
+                if (v.length < 3) {
+                    showIdentifierError("Username must be at least 3 characters long");
+                    okId = false;
+                    updateSubmitState();
+                    return;
+                }
+            }
+            hideIdentifierError();
+            okId = true;
+            updateSubmitState();
+        }
+        
+        function validatePassword() {
+            const p = password.value;
+            if (p.length === 0) {
+                showPasswordError("Password is required");
+                okPw = false;
+                updateSubmitState();
+                return;
+            }
+            if (p.length < 6) {
+                showPasswordError("Password must be at least 6 characters long");
+                okPw = false;
+                updateSubmitState();
+                return;
+            }
+            hidePasswordError();
+            okPw = true;
+            updateSubmitState();
+        }
+        
+        function showIdentifierError(msg) {
+            identifier.classList.add('error');
+            identifier.classList.remove('success');
+            identifierError.textContent = msg;
+            identifierError.style.display = 'block';
+        }
+        
+        function hideIdentifierError() {
+            identifier.classList.remove('error');
+            identifier.classList.add('success');
+            identifierError.style.display = 'none';
+        }
+        
+        function showPasswordError(msg) {
+            password.classList.add('error');
+            password.classList.remove('success');
+            passwordError.textContent = msg;
+            passwordError.style.display = 'block';
+        }
+        
+        function hidePasswordError() {
+            password.classList.remove('error');
+            password.classList.add('success');
+            passwordError.style.display = 'none';
+        }
+        
+        function updateSubmitState() {
+            if (okId && okPw) {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.pointerEvents = 'auto';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.pointerEvents = 'none';
+            }
+        }
+        
+        // Toggle password visibility
+        togglePassword.addEventListener('click', () => {
+            const t = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', t);
+            togglePassword.classList.toggle('fa-eye-slash');
+            togglePassword.classList.toggle('fa-eye');
+        });
+        
+        // Prevent JS forcing login: server will handle auth & redirects.
+        form.addEventListener('submit', function(e) {
+            // Run client validations (UX only)
+            validateIdentifier();
+            validatePassword();
+            if (!okId || !okPw) {
+                e.preventDefault();
+                alert("Please fix the errors in the form before submitting.");
+                return false;
+            }
+            // If valid, allow the POST to /login — server will respond with alert() or redirect.
+            // Do NOT redirect to /logd here; server decides after checking credentials.
+        });
+        
+        identifier.addEventListener('input', validateIdentifier);
+        identifier.addEventListener('blur', validateIdentifier);
+        password.addEventListener('input', validatePassword);
+        password.addEventListener('blur', validatePassword);
+    
+        // initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSubmitState();
+        });
+    </script>
+</body>
+</html>
