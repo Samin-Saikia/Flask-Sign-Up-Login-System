@@ -51,12 +51,13 @@ Else → User sees appropriate error message
 
 1/ Clone the repo:
 
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/Samin-Saikia/Flask-Sign-Up-Login-System.git
 
 
 2/ Install dependencies:
 
 pip install flask
+pip install sqlalchemy
 
 
 3/Run the app:
